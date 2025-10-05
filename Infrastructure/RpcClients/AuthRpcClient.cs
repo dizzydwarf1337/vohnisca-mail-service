@@ -20,7 +20,7 @@ public class AuthRpcClient : IAuthService
         });
         var response = await _rpcClient.SendAsync<TokenResponse>(
             new RpcRequest(
-                "AuthService.get_mail_confirmation_token",
+                "get_mail_confirmation_token",
                 parameters
             ));
         return new TokenResponse(response.Result.Token);

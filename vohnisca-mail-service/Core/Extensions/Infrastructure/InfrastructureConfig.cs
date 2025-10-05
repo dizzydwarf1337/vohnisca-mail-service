@@ -1,3 +1,4 @@
+using Application.Commands.SendMail;
 using Application.Consumers.Compaigns;
 using Application.Consumers.Users;
 using MassTransit;
@@ -14,7 +15,7 @@ public static class InfrastructureConfig
             x.AddConsumer<InvitationCreatedConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                cfg.Host("rabbitmq", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
@@ -32,7 +33,7 @@ public static class InfrastructureConfig
         });
         services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(SendMailCommand).Assembly);
         });
         return services;
     }

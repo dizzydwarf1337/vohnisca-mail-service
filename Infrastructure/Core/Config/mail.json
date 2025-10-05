@@ -1,0 +1,27 @@
+{
+  "openrpc": "1.2.6",
+  "info": {
+    "title": "Mail Service",
+    "version": "1.0.0"
+  },
+  "methods": [
+    {
+      "name": "send_mail",
+      "params": [
+        { "name": "email", "schema": { "type": "string" } },
+        { "name": "subject", "schema": { "type": "string" } },
+        { "name": "content", "schema": { "type": "string" } }
+      ],
+      "result": {
+        "name": "SendMailResult",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "Success": { "type": "boolean" },
+            "Message": { "type": "string" }
+          }
+        }
+      }
+    }
+  ]
+}

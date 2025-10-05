@@ -22,7 +22,7 @@ public class GmailService : IMailService
         _senderName = emailConfig["SenderName"];
 
     }
-    public async Task SendMail(string to, string subject, string body)
+    private async Task SendMail(string to, string subject, string body)
     {
         using var smtp = new SmtpClient(_smtpServer, _smtpPort);
         smtp.Credentials = new NetworkCredential(_senderEmail, _senderPassword);
@@ -41,122 +41,197 @@ public class GmailService : IMailService
         await smtp.SendMailAsync(mailMessage);
     }
 
+    public async Task SendDefaultMail(string to, string subject, string content)
+    {
+        var body = $@"
+            <body style=""margin: 0; padding: 0; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); font-family: Arial, sans-serif;"">
+                <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); min-height: 100vh;"">
+                    <tr>
+                        <td align=""center"" style=""padding: 20px;"">
+                            
+                            <!-- Main Container -->
+                            <table cellpadding=""0"" cellspacing=""0"" border=""0"" style=""max-width: 600px; width: 100%; background: linear-gradient(135deg, #2d1b4e 0%, #1e1538 100%); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,107,53,0.2);"">
+                                
+                                <!-- Header -->
+                                <tr>
+                                    <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4500 100%); padding: 30px 20px; text-align: center; border-radius: 15px 15px 0 0;"">
+                                        <h1 style=""margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"">
+                                            🔥 Vohnisca
+                                        </h1>
+                                        <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;"">
+                                            Where Adventures Ignite
+                                        </p>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Content Area -->
+                                <tr>
+                                    <td style=""padding: 30px 20px;"">
+                                        
+                                        <!-- Dynamic Content -->
+                                        <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: 12px; margin-bottom: 25px;"">
+                                            <tr>
+                                                <td style=""padding: 25px 20px; color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8;"">
+                                                    {content}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <!-- Footer Info -->
+                                        <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;"">
+                                            <tr>
+                                                <td align=""center"">
+                                                    <p style=""color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; margin: 0 0 15px 0; text-align: center;"">
+                                                        This email was sent from Vohnisca. If you have any questions, feel free to reach out!
+                                                    </p>
+                                                    <p style=""color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; text-align: center;"">
+                                                        Need help? Contact us at <a href=""mailto:support@vohnisca.com"" style=""color: #ff6b35; text-decoration: none;"">support@vohnisca.com</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <!-- Footer -->
+                                <tr>
+                                    <td style=""background: rgba(0,0,0,0.2); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 15px 15px;"">
+                                        <p style=""margin: 0 0 8px 0; color: #ff6b35; font-weight: 600; font-size: 15px;"">
+                                            — The Vohnisca Team 🔥
+                                        </p>
+                                        <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 11px;"">
+                                            Keep the fire burning!
+                                        </p>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        ";
+        await SendMail(to, subject, body);
+    }
+
     public async Task SendConfirmationMail(string to, string token)
     {
         var confirmationLink = $"http://localhost:3000/confirm?email={to}&token={token}";
         var body = $@"
         <body style=""margin: 0; padding: 0; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); font-family: Arial, sans-serif;"">
-    <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); min-height: 100vh;"">
-        <tr>
-            <td align=""center"" style=""padding: 20px;"">
-                
-                <!-- Main Container -->
-                <table cellpadding=""0"" cellspacing=""0"" border=""0"" style=""max-width: 600px; width: 100%; background: linear-gradient(135deg, #2d1b4e 0%, #1e1538 100%); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,107,53,0.2);"">
-                    
-                    <!-- Header -->
-                    <tr>
-                        <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4500 100%); padding: 30px 20px; text-align: center; border-radius: 15px 15px 0 0;"">
-                            <h1 style=""margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"">
-                                🔥 Vohnisca
-                            </h1>
-                            <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;"">
-                                Igniting connections
-                            </p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Content -->
-                    <tr>
-                        <td style=""padding: 30px 20px;"">
+            <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); min-height: 100vh;"">
+                <tr>
+                    <td align=""center"" style=""padding: 20px;"">
+                        
+                        <!-- Main Container -->
+                        <table cellpadding=""0"" cellspacing=""0"" border=""0"" style=""max-width: 600px; width: 100%; background: linear-gradient(135deg, #2d1b4e 0%, #1e1538 100%); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,107,53,0.2);"">
                             
-                            <!-- Icon and Title -->
-                            <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"">
-                                <tr>
-                                    <td align=""center"" style=""padding-bottom: 25px;"">
-                                        <table cellpadding=""0"" cellspacing=""0"" border=""0"">
-                                            <tr>
-                                                <td style=""width: 70px; height: 70px; background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 35px; text-align: center; vertical-align: middle; font-size: 28px; box-shadow: 0 8px 20px rgba(255,107,53,0.3);"">
-                                                    🔥
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <h2 style=""color: #ffffff; font-size: 24px; margin: 20px 0 8px 0; font-weight: 600;"">
-                                            Welcome to the Fire!
-                                        </h2>
-                                        <p style=""color: rgba(255,255,255,0.8); font-size: 15px; margin: 0; line-height: 1.6;"">
-                                            Your account is almost ready to ignite
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
+                            <!-- Header -->
+                            <tr>
+                                <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4500 100%); padding: 30px 20px; text-align: center; border-radius: 15px 15px 0 0;"">
+                                    <h1 style=""margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"">
+                                        🔥 Vohnisca
+                                    </h1>
+                                    <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;"">
+                                        Igniting connections
+                                    </p>
+                                </td>
+                            </tr>
                             
-                            <!-- Message Content -->
-                            <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: 12px; margin-bottom: 25px;"">
-                                <tr>
-                                    <td style=""padding: 25px 20px;"">
-                                        <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0 0 15px 0; text-align: center;"">
-                                            Thank you for joining <strong style=""color: #ff6b35;"">Vohnisca</strong>! 
-                                        </p>
-                                        <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0; text-align: center;"">
-                                            To complete your registration and light up your account, please confirm your email address by clicking the button below:
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
+                            <!-- Content -->
+                            <tr>
+                                <td style=""padding: 30px 20px;"">
+                                    
+                                    <!-- Icon and Title -->
+                                    <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"">
+                                        <tr>
+                                            <td align=""center"" style=""padding-bottom: 25px;"">
+                                                <table cellpadding=""0"" cellspacing=""0"" border=""0"">
+                                                    <tr>
+                                                        <td style=""width: 70px; height: 70px; background: linear-gradient(135deg, #ff6b35, #f7931e); border-radius: 35px; text-align: center; vertical-align: middle; font-size: 28px; box-shadow: 0 8px 20px rgba(255,107,53,0.3);"">
+                                                            🔥
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <h2 style=""color: #ffffff; font-size: 24px; margin: 20px 0 8px 0; font-weight: 600;"">
+                                                    Welcome to the Fire!
+                                                </h2>
+                                                <p style=""color: rgba(255,255,255,0.8); font-size: 15px; margin: 0; line-height: 1.6;"">
+                                                    Your account is almost ready to ignite
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <!-- Message Content -->
+                                    <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: 12px; margin-bottom: 25px;"">
+                                        <tr>
+                                            <td style=""padding: 25px 20px;"">
+                                                <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0 0 15px 0; text-align: center;"">
+                                                    Thank you for joining <strong style=""color: #ff6b35;"">Vohnisca</strong>! 
+                                                </p>
+                                                <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0; text-align: center;"">
+                                                    To complete your registration and light up your account, please confirm your email address by clicking the button below:
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <!-- CTA Button -->
+                                    <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"">
+                                        <tr>
+                                            <td align=""center"" style=""padding: 25px 0;"">
+                                                <table cellpadding=""0"" cellspacing=""0"" border=""0"">
+                                                    <tr>
+                                                        <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); border-radius: 50px; box-shadow: 0 8px 20px rgba(255,107,53,0.3);"">
+                                                            <a href=""{confirmationLink}"" style=""display: block; color: #ffffff; padding: 14px 30px; text-decoration: none; font-size: 16px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);"">
+                                                                🔥 Ignite My Account
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <!-- Footer Info -->
+                                    <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;"">
+                                        <tr>
+                                            <td align=""center"">
+                                                <p style=""color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; margin: 0 0 15px 0; text-align: center;"">
+                                                    If you didn't create an account with Vohnisca, you can safely ignore this email. 
+                                                    No account will be created and no further emails will be sent.
+                                                </p>
+                                                <p style=""color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; text-align: center;"">
+                                                    Need help? Contact us at <a href=""mailto:vohnisca.mail@gmail.com"" style=""color: #ff6b35; text-decoration: none;"">support@vohnisca.com</a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </td>
+                            </tr>
                             
-                            <!-- CTA Button -->
-                            <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"">
-                                <tr>
-                                    <td align=""center"" style=""padding: 25px 0;"">
-                                        <table cellpadding=""0"" cellspacing=""0"" border=""0"">
-                                            <tr>
-                                                <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); border-radius: 50px; box-shadow: 0 8px 20px rgba(255,107,53,0.3);"">
-                                                    <a href=""{{confirmationLink}}"" style=""display: block; color: #ffffff; padding: 14px 30px; text-decoration: none; font-size: 16px; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);"">
-                                                        🔥 Ignite My Account
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+                            <!-- Footer -->
+                            <tr>
+                                <td style=""background: rgba(0,0,0,0.2); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 15px 15px;"">
+                                    <p style=""margin: 0 0 8px 0; color: #ff6b35; font-weight: 600; font-size: 15px;"">
+                                        — The Vohnisca Team 🔥
+                                    </p>
+                                    <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 11px;"">
+                                        This email was sent from Vohnisca. Keep the fire burning!
+                                    </p>
+                                </td>
+                            </tr>
                             
-                            <!-- Footer Info -->
-                            <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;"">
-                                <tr>
-                                    <td align=""center"">
-                                        <p style=""color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; margin: 0 0 15px 0; text-align: center;"">
-                                            If you didn't create an account with Vohnisca, you can safely ignore this email. 
-                                            No account will be created and no further emails will be sent.
-                                        </p>
-                                        <p style=""color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; text-align: center;"">
-                                            Need help? Contact us at <a href=""mailto:support@vohnisca.com"" style=""color: #ff6b35; text-decoration: none;"">support@vohnisca.com</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style=""background: rgba(0,0,0,0.2); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 15px 15px;"">
-                            <p style=""margin: 0 0 8px 0; color: #ff6b35; font-weight: 600; font-size: 15px;"">
-                                — The Vohnisca Team 🔥
-                            </p>
-                            <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 11px;"">
-                                This email was sent from Vohnisca. Keep the fire burning!
-                            </p>
-                        </td>
-                    </tr>
-                    
-                </table>
-                
-            </td>
-        </tr>
-    </table>
-</body>";
+                        </table>
+                        
+                    </td>
+                </tr>
+            </table>
+        </body>";
 
         await SendMail(to, "Email-confirmation", body);
     }

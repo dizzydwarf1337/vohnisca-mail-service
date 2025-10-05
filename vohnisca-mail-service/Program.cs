@@ -10,10 +10,12 @@ builder.Services.AddInfrastructure()
     .AddHttpRpcClients(builder.Configuration)
     .AddAppServices()
     .AddCorsPolicy();
+
 var app = builder.Build();
 
-
 app.UseRouting();
+
+app.UseJsonRpc();
 
 app.UseCors("CorsPolicy");
 

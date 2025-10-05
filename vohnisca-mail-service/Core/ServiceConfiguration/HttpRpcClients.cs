@@ -1,4 +1,6 @@
+using Application.Interfaces.Services;
 using EdjCase.JsonRpc.Client;
+using Infrastructure.RpcClients;
 
 namespace vohnisca_mail_service.Core.ServiceConfiguration;
 
@@ -8,7 +10,7 @@ public static class HttpRpcClients
     {
         var authServiceUri = new Uri(configuration["RpcServices:AuthService"] ?? "");
             
-        services.AddSingleton(sp =>
+        services.AddSingleton<IAuthService>(_ =>
         {
             var httpClient = new HttpRpcClientBuilder(authServiceUri)
                 .ConfigureHttp(opt =>
@@ -16,7 +18,7 @@ public static class HttpRpcClients
                     opt.Headers = [("Accept", "application/json")];
                 })
                 .Build();
-            return httpClient;
+            return new AuthRpcClient(httpClient);
         });
 
         return services;
