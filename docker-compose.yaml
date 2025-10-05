@@ -1,0 +1,16 @@
+services:
+  vohnisca-mail-service:
+    image: vohnisca-mail-service
+    build:
+      context: .
+      dockerfile: vohnisca-mail-service.Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - vohnisca-net
+
+networks:
+  vohnisca-net:
+    external: true
