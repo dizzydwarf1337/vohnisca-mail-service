@@ -15,11 +15,11 @@ public class GmailService : IMailService
     public GmailService(IConfiguration configuration)
     {
         var emailConfig = configuration.GetSection("EmailSettings");
-        _smtpServer = emailConfig["SmtpServer"];
-        _smtpPort = int.Parse(emailConfig["SmtpPort"]);
-        _senderEmail = emailConfig["SenderEmail"];
-        _senderPassword = emailConfig["SenderPassword"];
-        _senderName = emailConfig["SenderName"];
+        _smtpServer = emailConfig["SmtpServer"] ?? throw new Exception("SMTP server not found");
+        _smtpPort = int.Parse(emailConfig["SmtpPort"] ?? throw new Exception("SMTP port not found"));
+        _senderEmail = emailConfig["SenderEmail"] ?? throw new Exception("Sender Email not found");
+        _senderPassword = emailConfig["SenderPassword"] ?? throw new Exception("Sender Password not found");
+        _senderName = emailConfig["SenderName"] ?? throw new Exception("Sender Name  not found");
 
     }
     private async Task SendMail(string to, string subject, string body)

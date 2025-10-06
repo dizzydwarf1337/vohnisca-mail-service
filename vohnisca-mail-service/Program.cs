@@ -5,6 +5,10 @@ using vohnisca_mail_service.Core.ServiceConfiguration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 builder.Services.AddInfrastructure()
     .AddApplicationServices()
     .AddHttpRpcClients(builder.Configuration)

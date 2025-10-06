@@ -2,7 +2,8 @@ namespace Application.Interfaces.Services;
 
 public interface IAuthService
 {
-    Task<TokenResponse> GetValidToken(string userMail);
+    Task<RpcResult<TokenResponse>> GetValidToken(string userMail);
 }
 
-public record TokenResponse(string Token);
+public record TokenResponse(string? Token);
+

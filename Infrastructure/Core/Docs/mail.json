@@ -6,19 +6,19 @@
   },
   "methods": [
     {
-      "name": "send_mail",
+      "name": "SendMail",
       "params": [
         { "name": "email", "schema": { "type": "string" } },
         { "name": "subject", "schema": { "type": "string" } },
         { "name": "content", "schema": { "type": "string" } }
       ],
       "result": {
-        "name": "SendMailResult",
+        "name": "sendMailResult",
         "schema": {
           "type": "object",
           "properties": {
-            "Success": { "type": "boolean" },
-            "Message": { "type": "string" }
+            "isSuccess": { "type": "boolean" },
+            "Error": { "type": "string" }
           }
         }
       }

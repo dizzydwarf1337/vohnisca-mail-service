@@ -18,7 +18,8 @@ public class InvitationCreatedConsumer : IConsumer<InvitationCreatedEvent>
     public async Task Consume(ConsumeContext<InvitationCreatedEvent> context)
     {
         var message = context.Message;
-        var tokenResponse = _authService.GetValidToken(message.To);
-        await _mailService.SendInvitation(message.To, message.CampaignName, message.CampaignId, "SecretToken");
+        var tokenResponse = await _authService.GetValidToken(message.To);
+        if (tokenResponse is { IsSuccess: true, Data.Token: not null })  
+            await _mailService.SendInvitation(message.To, message.CampaignName, message.CampaignId, tokenResponse.Data.Token);
     }
 }

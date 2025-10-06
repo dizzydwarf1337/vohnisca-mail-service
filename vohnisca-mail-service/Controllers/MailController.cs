@@ -13,7 +13,7 @@ public class MailController : RpcController
     public MailController(IMediator mediator)
         => _mediator = mediator;
 
-    public async Task<IRpcMethodResult> SendMail(string email, string subject, string content)
+    public async Task<object> SendMail(string email, string subject, string content)
     {
         var command = new SendMailCommand()
         {
@@ -22,6 +22,9 @@ public class MailController : RpcController
             Content = content
         };
         var result = await _mediator.Send(command);
-        return Ok(result);
+        if (!result.IsSuccess)
+            return new { isSuccess = false, error = result.Error ?? "Unknown error" };
+
+        return new { IsSuccess = true, error = "" };
     }
 }

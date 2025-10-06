@@ -19,6 +19,7 @@ public class UserCreatedConsumer : IConsumer<UserCreatedEvent>
     {
         var message = context.Message;
         var tokenResponse = await _authService.GetValidToken(message.UserMail);
-        await _mailService.SendConfirmationMail(message.UserMail, "AbobaToken");
+        if (tokenResponse is { IsSuccess: true, Data.Token: not null })  
+            await _mailService.SendConfirmationMail(message.UserMail, tokenResponse.Data.Token);
     }
 }
