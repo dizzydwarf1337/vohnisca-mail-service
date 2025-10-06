@@ -56,7 +56,7 @@ public class GmailService : IMailService
                                 <tr>
                                     <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4500 100%); padding: 30px 20px; text-align: center; border-radius: 15px 15px 0 0;"">
                                         <h1 style=""margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"">
-                                            🔥 Vohnisca
+                                            🔥 VOHNIŠČA
                                         </h1>
                                         <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;"">
                                             Where Adventures Ignite
@@ -82,7 +82,7 @@ public class GmailService : IMailService
                                             <tr>
                                                 <td align=""center"">
                                                     <p style=""color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; margin: 0 0 15px 0; text-align: center;"">
-                                                        This email was sent from Vohnisca. If you have any questions, feel free to reach out!
+                                                        This email was sent from vohnišča. If you have any questions, feel free to reach out!
                                                     </p>
                                                     <p style=""color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; text-align: center;"">
                                                         Need help? Contact us at <a href=""mailto:support@vohnisca.com"" style=""color: #ff6b35; text-decoration: none;"">support@vohnisca.com</a>
@@ -98,7 +98,7 @@ public class GmailService : IMailService
                                 <tr>
                                     <td style=""background: rgba(0,0,0,0.2); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 15px 15px;"">
                                         <p style=""margin: 0 0 8px 0; color: #ff6b35; font-weight: 600; font-size: 15px;"">
-                                            — The Vohnisca Team 🔥
+                                            — The Vohnišča Team 🔥
                                         </p>
                                         <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 11px;"">
                                             Keep the fire burning!
@@ -132,7 +132,7 @@ public class GmailService : IMailService
                             <tr>
                                 <td style=""background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4500 100%); padding: 30px 20px; text-align: center; border-radius: 15px 15px 0 0;"">
                                     <h1 style=""margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);"">
-                                        🔥 Vohnisca
+                                        🔥 VOHNIŠČA
                                     </h1>
                                     <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 14px;"">
                                         Igniting connections
@@ -170,7 +170,7 @@ public class GmailService : IMailService
                                         <tr>
                                             <td style=""padding: 25px 20px;"">
                                                 <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0 0 15px 0; text-align: center;"">
-                                                    Thank you for joining <strong style=""color: #ff6b35;"">Vohnisca</strong>! 
+                                                    Thank you for joining <strong style=""color: #ff6b35;"">Vohnišča</strong>! 
                                                 </p>
                                                 <p style=""color: rgba(255,255,255,0.9); font-size: 15px; line-height: 1.8; margin: 0; text-align: center;"">
                                                     To complete your registration and light up your account, please confirm your email address by clicking the button below:
@@ -201,7 +201,7 @@ public class GmailService : IMailService
                                         <tr>
                                             <td align=""center"">
                                                 <p style=""color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6; margin: 0 0 15px 0; text-align: center;"">
-                                                    If you didn't create an account with Vohnisca, you can safely ignore this email. 
+                                                    If you didn't create an account with Vohnišča, you can safely ignore this email. 
                                                     No account will be created and no further emails will be sent.
                                                 </p>
                                                 <p style=""color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; text-align: center;"">
@@ -218,10 +218,10 @@ public class GmailService : IMailService
                             <tr>
                                 <td style=""background: rgba(0,0,0,0.2); padding: 25px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 15px 15px;"">
                                     <p style=""margin: 0 0 8px 0; color: #ff6b35; font-weight: 600; font-size: 15px;"">
-                                        — The Vohnisca Team 🔥
+                                        — The Vohnišča Team 🔥
                                     </p>
                                     <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 11px;"">
-                                        This email was sent from Vohnisca. Keep the fire burning!
+                                        This email was sent from Vohnišča. Keep the fire burning!
                                     </p>
                                 </td>
                             </tr>
@@ -256,7 +256,7 @@ public class GmailService : IMailService
                                     <td width=""30"" style=""font-size: 20px; color: rgba(255,255,255,0.6);"">⚔️</td>
                                     <td align=""center"">
                                         <h1 style=""margin: 0; color: #ffffff; font-size: 32px; font-weight: bold; text-shadow: 3px 3px 6px rgba(0,0,0,0.4);"">
-                                            🔥 Vohnisca
+                                            🔥 VOHNIŠČA
                                         </h1>
                                         <p style=""margin: 10px 0 0 0; color: rgba(255,255,255,0.9); font-size: 16px; font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);"">
                                             Where Adventures Ignite
@@ -390,10 +390,10 @@ public class GmailService : IMailService
                     <tr>
                         <td style=""background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%); padding: 30px 20px; text-align: center; border-top: 1px solid rgba(212,175,55,0.3);"">
                             <p style=""margin: 0 0 8px 0; color: #d4af37; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);"">
-                                — The Guild Masters of Vohnisca 🔥⚔️
+                                — The Guild Masters of Vohnišča 🔥⚔️
                             </p>
                             <p style=""margin: 0; color: rgba(255,255,255,0.5); font-size: 12px; font-style: italic;"">
-                                ""In the flames of Vohnisca, legends are forged and adventures ignite""
+                                ""In the flames of Vohnišča, legends are forged and adventures ignite""
                             </p>
                         </td>
                     </tr>

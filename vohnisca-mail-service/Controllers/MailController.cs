@@ -1,6 +1,5 @@
 using Application.Commands.SendMail;
 using EdjCase.JsonRpc.Router;
-using EdjCase.JsonRpc.Router.Abstractions;
 using MediatR;
 
 namespace vohnisca_mail_service.Controllers;
@@ -25,6 +24,6 @@ public class MailController : RpcController
         if (!result.IsSuccess)
             return new { isSuccess = false, error = result.Error ?? "Unknown error" };
 
-        return new { IsSuccess = true, error = "" };
+        return new { isSuccess = true, error = "" };
     }
 }
