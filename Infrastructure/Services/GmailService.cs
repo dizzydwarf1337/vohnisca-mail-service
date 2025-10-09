@@ -236,9 +236,9 @@ public class GmailService : IMailService
         await SendMail(to, "Email-confirmation", body);
     }
 
-    public async Task SendInvitation(string to, string campaignName, Guid campaignId, string token)
+    public async Task SendInvitation(string to, string campaignName, Guid campaignId)
     {
-        var invitationLink =$"http://localhost:3000/invite?email={to}&campaignId={campaignId}&token={token}";;
+        var invitationLink =$"http://localhost:3000/invite?email={to}&campaignId={campaignId}";;
         var body = $@"
         <body style=""margin: 0; padding: 0; background: linear-gradient(135deg, #0a0f1c 0%, #1a1a2e 50%, #2d1b4e 100%); font-family: Arial, sans-serif; min-height: 100vh;"">
     <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: linear-gradient(135deg, #0a0f1c 0%, #1a1a2e 50%, #2d1b4e 100%); min-height: 100vh;"">

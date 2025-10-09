@@ -1,25 +1,33 @@
 using Application.Interfaces.Contracts.Campaigns;
 using Application.Interfaces.Services;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Consumers.Compaigns;
 
 public class InvitationCreatedConsumer : IConsumer<InvitationCreatedEvent>
 {
-    private readonly IAuthService _authService;
     private readonly IMailService _mailService;
+    private readonly Logger<InvitationCreatedConsumer> _logger;
 
-    public InvitationCreatedConsumer(IAuthService authService, IMailService mailService)
+    public InvitationCreatedConsumer(IMailService mailService,  Logger<InvitationCreatedConsumer> logger)
     {
-        _authService = authService;
         _mailService = mailService;
+        _logger = logger;
     }
     
     public async Task Consume(ConsumeContext<InvitationCreatedEvent> context)
     {
-        var message = context.Message;
-        var tokenResponse = await _authService.GetValidToken(message.To);
-        if (tokenResponse is { IsSuccess: true, Data.Token: not null })  
-            await _mailService.SendInvitation(message.To, message.CampaignName, message.CampaignId, tokenResponse.Data.Token);
+        try
+        {
+            var message = context.Message;
+            await _mailService.SendInvitation(message.To, message.CampaignName, message.CampaignId);
+            _logger.LogInformation("Sending email - InvitationCreatedEvent");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending email");
+        }
+
     }
 }

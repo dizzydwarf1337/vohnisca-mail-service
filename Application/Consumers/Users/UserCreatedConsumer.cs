@@ -1,25 +1,32 @@
 using Application.Interfaces.Contracts.Users;
 using Application.Interfaces.Services;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Consumers.Users;
 
 public class UserCreatedConsumer : IConsumer<UserCreatedEvent>
 {
-    private readonly IAuthService _authService;
     private readonly IMailService _mailService;
+    private readonly Logger<UserCreatedConsumer> _logger;
 
-    public UserCreatedConsumer(IAuthService authService, IMailService mailService)
+    public UserCreatedConsumer(IMailService mailService,  Logger<UserCreatedConsumer> logger)
     {
-        _authService = authService;
         _mailService = mailService;
+        _logger = logger;
     }
     
     public async Task Consume(ConsumeContext<UserCreatedEvent> context)
     {
-        var message = context.Message;
-        var tokenResponse = await _authService.GetValidToken(message.UserMail);
-        if (tokenResponse is { IsSuccess: true, Data.Token: not null })  
-            await _mailService.SendConfirmationMail(message.UserMail, tokenResponse.Data.Token);
+        try
+        {
+            var message = context.Message;
+            await _mailService.SendConfirmationMail(message.UserMail, message.Token);
+            _logger.LogInformation("Sending mail - UserCreatedEvent");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending mail");
+        }
     }
 }
