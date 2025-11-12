@@ -1,3 +1,3 @@
 namespace Application.Interfaces.Contracts.Users;
 
-public record UserCreatedEvent(string UserMail, string Token);
+public record UserCreatedEvent(Guid UserId, string UserMail, string Token);
