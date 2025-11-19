@@ -15,6 +15,7 @@ public static class InfrastructureConfig
             x.AddConsumer<InvitationCreatedConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
+                cfg.UseRawJsonDeserializer();
                 cfg.Host("rabbitmq", "/", h =>
                 {
                     h.Username("guest");
@@ -35,6 +36,8 @@ public static class InfrastructureConfig
         {
             cfg.RegisterServicesFromAssembly(typeof(SendMailCommand).Assembly);
         });
+
+        services.AddLogging();
         return services;
     }
 }

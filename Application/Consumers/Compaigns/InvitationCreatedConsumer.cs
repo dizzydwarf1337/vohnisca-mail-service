@@ -8,9 +8,9 @@ namespace Application.Consumers.Compaigns;
 public class InvitationCreatedConsumer : IConsumer<InvitationCreatedEvent>
 {
     private readonly IMailService _mailService;
-    private readonly Logger<InvitationCreatedConsumer> _logger;
+    private readonly ILogger<InvitationCreatedConsumer> _logger;
 
-    public InvitationCreatedConsumer(IMailService mailService,  Logger<InvitationCreatedConsumer> logger)
+    public InvitationCreatedConsumer(IMailService mailService, ILogger<InvitationCreatedConsumer> logger)
     {
         _mailService = mailService;
         _logger = logger;

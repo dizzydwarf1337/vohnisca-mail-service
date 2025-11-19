@@ -8,9 +8,9 @@ namespace Application.Consumers.Users;
 public class UserCreatedConsumer : IConsumer<UserCreatedEvent>
 {
     private readonly IMailService _mailService;
-    private readonly Logger<UserCreatedConsumer> _logger;
+    private readonly ILogger<UserCreatedConsumer> _logger;
 
-    public UserCreatedConsumer(IMailService mailService,  Logger<UserCreatedConsumer> logger)
+    public UserCreatedConsumer(IMailService mailService, ILogger<UserCreatedConsumer> logger)
     {
         _mailService = mailService;
         _logger = logger;
