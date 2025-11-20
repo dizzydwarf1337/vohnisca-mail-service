@@ -118,7 +118,7 @@ public class GmailService : IMailService
 
     public async Task SendConfirmationMail(string to, string token)
     {
-        var confirmationLink = $"http://localhost:3000/confirm?email={to}&token={token}";
+        var confirmationLink = $"http://localhost:3000/auth/confirm?email={to}&token={token}";
         var body = $@"
         <body style=""margin: 0; padding: 0; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); font-family: Arial, sans-serif;"">
             <table cellpadding=""0"" cellspacing=""0"" border=""0"" width=""100%"" style=""background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%); min-height: 100vh;"">
