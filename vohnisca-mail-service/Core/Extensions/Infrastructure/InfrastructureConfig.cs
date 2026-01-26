@@ -1,6 +1,7 @@
 using Application.Commands.SendMail;
 using Application.Consumers.Compaigns;
 using Application.Consumers.Users;
+using Application.Interfaces.Contracts.Users;
 using MassTransit;
 
 namespace vohnisca_mail_service.Core.Extensions.Infrastructure;
@@ -16,12 +17,14 @@ public static class InfrastructureConfig
             x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.UseRawJsonDeserializer();
+                
+                cfg.Message<UserCreatedEvent>(m => m.SetEntityName("user-created"));
                 cfg.Host("rabbitmq", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
                 });
-                cfg.ReceiveEndpoint("user-created", e =>
+                cfg.ReceiveEndpoint("mail-service-user-created", e =>
                 {
                     e.ConfigureConsumer<UserCreatedConsumer>(context);
                 });
